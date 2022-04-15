@@ -22,7 +22,7 @@ file2 = open('config/badwordlist.ini',mode='r', encoding='UTF8')
 allbdwd = file2.read()
 ylist = literal_eval(allbdwd)#list
 
-#학습불가(개발중)
+#학습가능 : /mod3
 file3 = open('config/randomword.ini',mode='r', encoding='UTF8')
 allrwd = file3.read()
 randy = literal_eval(allrwd)#list

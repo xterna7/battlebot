@@ -35,6 +35,7 @@ class Lrn:
         self.status = 0
 
     def learn(text, key):
+        global replist
         value = replist2.get(key)
         if value == None:
             replist2[key] = []
@@ -52,6 +53,7 @@ class Lrn:
             print('학습 완료')
 
     def learn2(text):
+        global ylist
         ylist2.append(text)
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(ylist2))
@@ -60,6 +62,7 @@ class Lrn:
         print('학습 완료. 상대가 이 단어를 쳤을 때 반박합니다..')
 
     def learn3(text):
+        global randy
         randy2.append(text)
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(randy2))
@@ -73,6 +76,7 @@ class Rmv:
         self.plain = None
 
     def remove1(self, key):
+        global replist
         replist2[key].remove(self.plain)
         file = open('config/replist.ini', mode='w', encoding='UTF8')
         file.write(str(replist2))
@@ -81,6 +85,7 @@ class Rmv:
         print('제거 완료')
 
     def remove1key(self, key):
+        global replist
         del replist2[key]
         file = open('config/replist.ini', mode='w', encoding='UTF8')
         file.write(str(replist2))
@@ -89,6 +94,7 @@ class Rmv:
         print('제거 완료')
 
     def remove2(self, value):
+        global ylist
         ylist2.remove(value)
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(ylist2))
@@ -97,6 +103,7 @@ class Rmv:
         print('제거 완료')
 
     def remove3(self, value):
+        global randy
         randy2.remove(value)
         file = open('config/randomword.ini', mode='w', encoding='UTF8')
         file.write(str(randy2))
@@ -165,7 +172,6 @@ async def on_message(message):
     id = message.author.id
 
     masterlist.append(842010766927593512)  # hyperdemented
-    masterlist.append(376002672387555329)  # 주녕
 
     if message.author.id == client.user.id:
         return
@@ -323,6 +329,5 @@ async def on_message(message):
         status = 1
         replyabout()
         await message.channel.send(tet)
-
 
 client.run(token, bot=False)

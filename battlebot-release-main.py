@@ -74,7 +74,7 @@ class Lrn:
         global randy
         if attack == 1:
             randy2.append(text)
-            file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
+            file = open('config/randomword.ini', mode='w', encoding='UTF8')
             file.write(str(randy2))
             file.close()
             randy = randy2

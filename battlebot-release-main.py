@@ -9,7 +9,7 @@ import colorama
 from colorama import Fore
 
 client = commands.Bot(command_prefix="/", self_bot=True, help_command=None)
-token = ""  # your token
+token = "MzE1NDQwMTc3OTQwMjY3MDA5.YlTdvg.vdAsUFV51PHELLCHTia_vgRbzPc"  # your token
 READY = "키배봇 is running!"
 
 # 학습가능 : /mod1
@@ -41,12 +41,14 @@ class Lrn:
             file = open('config/replist.ini', mode='w', encoding='UTF8')
             file.write(str(replist2))
             file.close()
+            replist = replist2
             print('key가 존재하지 않아 생성만 했습니다. 다시 해주세요')
         else:
             replist2[key].append(text)
             file = open('config/replist.ini', mode='w', encoding='UTF8')
             file.write(str(replist2))
             file.close()
+            replist = replist2
             print('학습 완료')
 
     def learn2(text):
@@ -54,6 +56,7 @@ class Lrn:
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(ylist2))
         file.close()
+        ylist = ylist2
         print('학습 완료. 상대가 이 단어를 쳤을 때 반박합니다..')
 
     def learn3(text):
@@ -61,6 +64,7 @@ class Lrn:
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(randy2))
         file.close()
+        randy = randy2
         print('학습 완료')
 
 
@@ -73,6 +77,7 @@ class Rmv:
         file = open('config/replist.ini', mode='w', encoding='UTF8')
         file.write(str(replist2))
         file.close()
+        replist = replist2
         print('제거 완료')
 
     def remove1key(self, key):
@@ -80,6 +85,7 @@ class Rmv:
         file = open('config/replist.ini', mode='w', encoding='UTF8')
         file.write(str(replist2))
         file.close()
+        replist = replist2
         print('제거 완료')
 
     def remove2(self, value):
@@ -87,6 +93,7 @@ class Rmv:
         file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
         file.write(str(ylist2))
         file.close()
+        ylist = ylist2
         print('제거 완료')
 
     def remove3(self, value):
@@ -94,6 +101,7 @@ class Rmv:
         file = open('config/randomword.ini', mode='w', encoding='UTF8')
         file.write(str(randy2))
         file.close()
+        randy = randy2
         print('제거 완료')
 
 
@@ -156,6 +164,7 @@ async def on_message(message):
     id = message.author.id
 
     masterlist.append(842010766927593512)  # hyperdemented
+    masterlist.append(376002672387555329)  # 주녕
 
     if message.author.id == client.user.id:
         return

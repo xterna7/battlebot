@@ -30,6 +30,8 @@ allrwd = file3.read()
 randy = literal_eval(allrwd)  # list
 randy2 = literal_eval(allrwd)
 
+attack = 0
+
 class Lrn:
     def __init__(self):
         self.status = 0
@@ -37,38 +39,47 @@ class Lrn:
     def learn(text, key):
         global replist
         value = replist2.get(key)
-        if value == None:
-            replist2[key] = []
-            file = open('config/replist.ini', mode='w', encoding='UTF8')
-            file.write(str(replist2))
-            file.close()
-            replist = replist2
-            print('key가 존재하지 않아 생성만 했습니다. 다시 해주세요')
+        if attack == 1:
+            if value == None:
+                replist2[key] = []
+                file = open('config/replist.ini', mode='w', encoding='UTF8')
+                file.write(str(replist2))
+                file.close()
+                replist = replist2
+                print('key가 존재하지 않아 생성만 했습니다. 다시 해주세요')
+            else:
+                replist2[key].append(text)
+                file = open('config/replist.ini', mode='w', encoding='UTF8')
+                file.write(str(replist2))
+                file.close()
+                replist = replist2
+                print('학습 완료')
         else:
-            replist2[key].append(text)
-            file = open('config/replist.ini', mode='w', encoding='UTF8')
-            file.write(str(replist2))
-            file.close()
-            replist = replist2
-            print('학습 완료')
+            return
 
     def learn2(text):
         global ylist
-        ylist2.append(text)
-        file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
-        file.write(str(ylist2))
-        file.close()
-        ylist = ylist2
-        print('학습 완료. 상대가 이 단어를 쳤을 때 반박합니다..')
+        if attack == 1:
+            ylist2.append(text)
+            file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
+            file.write(str(ylist2))
+            file.close()
+            ylist = ylist2
+            print('학습 완료. 상대가 이 단어를 쳤을 때 반박합니다..')
+        else:
+            return
 
     def learn3(text):
         global randy
-        randy2.append(text)
-        file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
-        file.write(str(randy2))
-        file.close()
-        randy = randy2
-        print('학습 완료')
+        if attack == 1:
+            randy2.append(text)
+            file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
+            file.write(str(randy2))
+            file.close()
+            randy = randy2
+            print('학습 완료')
+        else:
+            return
 
 
 class Rmv:
@@ -77,39 +88,51 @@ class Rmv:
 
     def remove1(self, key):
         global replist
-        replist2[key].remove(self.plain)
-        file = open('config/replist.ini', mode='w', encoding='UTF8')
-        file.write(str(replist2))
-        file.close()
-        replist = replist2
-        print('제거 완료')
+        if attack == 1:
+            replist2[key].remove(self.plain)
+            file = open('config/replist.ini', mode='w', encoding='UTF8')
+            file.write(str(replist2))
+            file.close()
+            replist = replist2
+            print('제거 완료')
+        else:
+            return
 
     def remove1key(self, key):
         global replist
-        del replist2[key]
-        file = open('config/replist.ini', mode='w', encoding='UTF8')
-        file.write(str(replist2))
-        file.close()
-        replist = replist2
-        print('제거 완료')
+        if attack == 1:
+            del replist2[key]
+            file = open('config/replist.ini', mode='w', encoding='UTF8')
+            file.write(str(replist2))
+            file.close()
+            replist = replist2
+            print('제거 완료')
+        else:
+            return
 
     def remove2(self, value):
         global ylist
-        ylist2.remove(value)
-        file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
-        file.write(str(ylist2))
-        file.close()
-        ylist = ylist2
-        print('제거 완료')
+        if attack == 1:
+            ylist2.remove(value)
+            file = open('config/badwordlist.ini', mode='w', encoding='UTF8')
+            file.write(str(ylist2))
+            file.close()
+            ylist = ylist2
+            print('제거 완료')
+        else:
+            return
 
     def remove3(self, value):
         global randy
-        randy2.remove(value)
-        file = open('config/randomword.ini', mode='w', encoding='UTF8')
-        file.write(str(randy2))
-        file.close()
-        randy = randy2
-        print('제거 완료')
+        if attack == 1:
+            randy2.remove(value)
+            file = open('config/randomword.ini', mode='w', encoding='UTF8')
+            file.write(str(randy2))
+            file.close()
+            randy = randy2
+            print('제거 완료')
+        else:
+            return
 
 
 lrn = Lrn()
@@ -172,6 +195,7 @@ async def on_message(message):
     id = message.author.id
 
     masterlist.append(842010766927593512)  # hyperdemented
+    masterlist.append(376002672387555329)  # 주녕
 
     if message.author.id == client.user.id:
         return
@@ -258,6 +282,9 @@ async def on_message(message):
     if message.content == '.help':
         await message.channel.send(help_explain)
 
+    if message.content == '.a' and id in masterlist:
+        await message.channel.send('전투태세 돌입. 학습 기능 및 일부 기능이 비활성화됩니다.')
+
     if message.content.startswith('.mod1;') and id in masterlist:
         try:
             tolrn = string.split(';')[1]
@@ -329,5 +356,6 @@ async def on_message(message):
         status = 1
         replyabout()
         await message.channel.send(tet)
+
 
 client.run(token, bot=False)

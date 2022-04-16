@@ -9,7 +9,7 @@ import colorama
 from colorama import Fore
 
 client = commands.Bot(command_prefix="/", self_bot=True, help_command=None)
-token = "MzE1NDQwMTc3OTQwMjY3MDA5.YlTdvg.vdAsUFV51PHELLCHTia_vgRbzPc"  # your token
+token = ""  # your token
 READY = "키배봇 is running!"
 
 # 학습가능 : /mod1

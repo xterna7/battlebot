@@ -124,6 +124,7 @@ mod1:메인욕 학습 시스템(with key)
 mod2:상대방이 mod2 명령어로 학습시킨 말을 할 시에 답장함
 mod3:랜덤욕 학습 시스템
 rm-mod1:메인욕 제거 시스템(with key)
+rmk-mod1:메인욕 제거 시스템(only key)
 rm-mod2:mod2로 학습시킨것을 제거하는 시스템
 rm-mod3:랜덤욕 제거 시스템
 made by xterna7

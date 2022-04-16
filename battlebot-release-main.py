@@ -30,7 +30,7 @@ allrwd = file3.read()
 randy = literal_eval(allrwd)  # list
 randy2 = literal_eval(allrwd)
 
-attack = 0
+attack = 1
 
 class Lrn:
     def __init__(self):
@@ -283,8 +283,10 @@ async def on_message(message):
         await message.channel.send(help_explain)
 
     if message.content == '.a' and id in masterlist:
+        global attack
         await message.channel.send('전투태세 돌입. 학습 기능 및 일부 기능이 비활성화됩니다.')
-
+        attack = -1
+        
     if message.content.startswith('.mod1;') and id in masterlist:
         try:
             tolrn = string.split(';')[1]

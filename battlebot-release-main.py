@@ -32,6 +32,7 @@ randy2 = literal_eval(allrwd)
 
 attack = 1
 
+
 class Lrn:
     def __init__(self):
         self.status = 0
@@ -278,7 +279,6 @@ async def on_message(message):
         elif status == -1:
             return
 
-
     if message.content == '.help':
         await message.channel.send(help_explain)
 
@@ -286,13 +286,16 @@ async def on_message(message):
         global attack
         await message.channel.send('전투태세 돌입. 학습 기능 및 일부 기능이 비활성화됩니다.')
         attack = -1
-        
+
     if message.content.startswith('.mod1;') and id in masterlist:
         try:
             tolrn = string.split(';')[1]
             key = string.split(';')[2]
             Lrn.learn(tolrn, key)
-            await message.channel.send('학습 완료')
+            if attack == 1:
+                await message.channel.send('학습 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .mod1;[배울내용];[key값]')
 
@@ -300,7 +303,10 @@ async def on_message(message):
         try:
             tolrn = string.split(';')[1]
             Lrn.learn2(tolrn)
-            await message.channel.send('학습 완료')
+            if attack == 1:
+                await message.channel.send('학습 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .mod2;[배울내용]')
 
@@ -308,7 +314,10 @@ async def on_message(message):
         try:
             tolrn = string.split(';')[1]
             Lrn.learn3(tolrn)
-            await message.channel.send('학습 완료')
+            if attack == 1:
+                await message.channel.send('학습 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .mod3;[배울내용]')
 
@@ -319,7 +328,10 @@ async def on_message(message):
             rmv.plain = torm
             rmv.remove1(key)
             SE -= 1
-            await message.channel.send('제거 완료')
+            if attack == 1:
+                await message.channel.send('제거 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .rm-mod1;[지울내용];[key값]')
 
@@ -329,7 +341,10 @@ async def on_message(message):
             rmv.remove1key(key)
             keylist.remove(key)
             SE -= len(replist[key])
-            await message.channel.send('제거 완료')
+            if attack == 1:
+                await message.channel.send('제거 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .rmk-mod1;[지울key값]')
 
@@ -337,7 +352,10 @@ async def on_message(message):
         try:
             value = string.split(';')[1]
             rmv.remove2(value)
-            await message.channel.send('제거 완료')
+            if attack == 1:
+                await message.channel.send('제거 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .rm-mod2;[지울내용]')
 
@@ -345,7 +363,10 @@ async def on_message(message):
         try:
             value = string.split(';')[1]
             rmv.remove3(value)
-            await message.channel.send('제거 완료')
+            if attack == 1:
+                await message.channel.send('제거 완료')
+            else:
+                await message.channel.send('전투상태입니다.')
         except:
             await message.channel.send('오류 발생. Usage: .rm-mod3;[지울내용]')
 
